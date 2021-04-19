@@ -73,3 +73,4 @@ xText
     .attr("data-axis", "x")
     .attr("class", "aText inactive x")
     .text("Median Household Income")
+// Y axis: Obesity, Smoker and Has Healthcare
