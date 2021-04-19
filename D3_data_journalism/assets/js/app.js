@@ -107,6 +107,7 @@ yText
     .attr("data-axis", "y")
     .attr("class", "aText inactive y")
     .text("Percent Smokes");
+// Healthcare
 yText
     .append("text")
     .attr("y", 26)
@@ -115,3 +116,77 @@ yText
     .attr("class", "aText inactive y")
     .text("Percentage Without Healthcare");
 
+// IMPORT FILE
+
+// D3.csv file path location
+d3.csv("D3_data_journalism/assets/data/data.csv").then(function(data) {
+    visualize(data);
+});
+
+// CREATE VISUALIZATION
+
+// Create visualization manipulation function
+function visualize(theData) {
+    // Default visualizatioin
+    var curX = "poverty";
+    var curY = "obesity";
+    // Create empty min/max variables
+    var xMin;
+    var xMax;
+    var yMin;
+    var yMax;
+    // Set up tooltip rules function
+    var toolTip = d3
+        .tip()
+        .attr("class", "d3-tip")
+        .offset([40, -60])
+        .html(function(d) {
+            // x key
+            var theX;
+            // Select the state
+            var theState = "<div>" + d.state + "</div>";
+            // Select y key and value
+            var theY = "<div>" + curY + ": " + d[curY] + "%</div>";
+            // If statement: if x equals poverty then
+            if (curX === "poverty") {
+                // grab value formatted to show percentage
+                theX = "<div>" + curX + ": " + d[curX] + "%</div>"; 
+            }
+            // Else grab value formatted to show delimiter
+            else {
+                theX = "<div>" +
+                    curX +
+                    ": " +
+                    parseFloat(d[curX]).toLocaleString("en") +
+                    "</div>";
+            // Display return data
+            }
+            return theState + theX + theY;
+        });
+    // Call tooltip function
+    svg.call(toolTip);
+
+    // Create remove repetative code x function
+    function xMinMax() {
+        // Select smallest data from column
+        xMin = d3.min(theData, function(d) {
+            return parseFloat(d[curX]) * 0.90;
+        });
+        // Select largest data from the column
+        xMax = d3.max(theData, function(d) {
+            return parseFloat(d[curx]) * 1.10;
+        });
+    }
+    // Create remove repetative code y function
+    function yMinMax() {
+        // Select smallest data from the column
+        yMin = d3.min(theData, function(d) {
+            return parseFloat(d[curY]) * 0.90;
+        });
+        // Select largest data from the column
+        yMax = d3.max(theData, function(d) {
+            return parseFloat(d[curY]) * 1.10;
+        });
+    }
+
+}
