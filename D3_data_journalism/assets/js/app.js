@@ -12,4 +12,18 @@ let tPadLeft = 40;
 var svg = d3
     .select("#scatter")
     .append("svg")
-    .attr()
+    .attr("width", width)
+    .attr("height", height)
+    .attr("class", "chart");
+
+// Define Function for Plot Icons
+var circRadius;
+function crGet() {
+    if (width <= 530) {
+        circRadius = 5;
+    }
+    else {
+        circRadius = 10;
+    }
+}
+crGet();
