@@ -1,6 +1,8 @@
 // JavaScript code for Homework Assignment number 13: D3 Animated Scatter Plot
 
-// Scatter Plot Container Box Parameters
+// SCATTER PLOT PARAMETERS
+
+// Scatter plot container box parameters
 let width = parseInt(d3.select("#scatter").style("width"));
 let height = width - width / 4.0;
 let margin = 20;
@@ -8,7 +10,7 @@ let labelArea = 110;
 let tPadBot = 40;
 let tPadLeft = 40;
 
-// Scatter Plot SVG Setup
+// Scatter plot SVG setup
 var svg = d3
     .select("#scatter")
     .append("svg")
@@ -16,7 +18,7 @@ var svg = d3
     .attr("height", height)
     .attr("class", "chart");
 
-// Define Function for Plot Icons
+// Define function for plot icons
 var circRadius;
 function crGet() {
     if (width <= 530) {
@@ -27,3 +29,47 @@ function crGet() {
     }
 }
 crGet();
+
+// SCATTER PLOT LABELS
+
+// X Axis: Poverty, Age and Income
+// Group X axis labels
+svg.append("g").attr("class", "xText");
+// Define variable to select group
+var xText = d3.select(".xText");
+// Place group at bottom of chart with scalability
+function xTextRefresh() {
+    xText.attr(
+        "transform",
+        "translate(" +
+            ((width - labelArea) / 2 + labelArea) +
+            ", " +
+            (heigt - margin - tPadBot) +
+            ")"
+    );
+}
+xTextRefresh();
+// Append labels and define spacing
+// Poverty
+xText
+    .append("text")
+    .attr("y", -26)
+    .attr("data-name", "poverty")
+    .attr("data-axis", "x")
+    .attr("class", "aText active x")
+    .text("Percent In Poverty");
+// Age
+xText
+    .append("text")
+    .attr("y", 0)
+    .attr("data-name", "age")
+    .attr("data-axis", "x")
+    .attr("class", "aText inactive x")
+    .text("Median Age");
+// Income
+    .append("text")
+    .attr("y", 26)
+    .attr("data-name", "income")
+    .attr("data-axis", "x")
+    .attr("class", "aText inactive x")
+    .text("Median Household Income")
