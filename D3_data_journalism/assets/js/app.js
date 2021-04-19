@@ -35,9 +35,9 @@ crGet();
 // X Axis: Poverty, Age and Income
 // Group X axis labels
 svg.append("g").attr("class", "xText");
-// Define variable to select group
+// D3.select x axis group
 var xText = d3.select(".xText");
-// Place group at bottom of chart with scalability
+// Place group at bottom of chart with window scalability
 function xTextRefresh() {
     xText.attr(
         "transform",
@@ -49,7 +49,7 @@ function xTextRefresh() {
     );
 }
 xTextRefresh();
-// Append labels and define spacing
+// Append labels, define axis and set spacing
 // Poverty
 xText
     .append("text")
@@ -73,4 +73,45 @@ xText
     .attr("data-axis", "x")
     .attr("class", "aText inactive x")
     .text("Median Household Income")
+
 // Y axis: Obesity, Smoker and Has Healthcare
+// Additional X/Y axis spacing
+var leftTextX = margin + tPadLeft;
+var leftTextY = (height + labelArea) / 2 - labelArea;
+// Group Y axis labels
+svg.append("g").attr("class", "yText");
+// D3.select y axis group
+var yText = d3.select(".yText");
+// Place group at left of chart with window scalability
+function yTextRefresh() {
+    yText.attr(
+        "transform",
+        "translate(" + leftTextX + ", " + leftTextY + ")rotate(-90)"
+    );
+}
+yTextRefresh();
+// Append labels, define axis and set spacing
+// Obesity
+yText 
+    .append("text")
+    .attr("y", -26)
+    .attr("data-name", "obesity")
+    .attr("data-axis", "y")
+    .attr("class", "aText active y")
+    .text("Percent Obese");
+// Smoker
+yText
+    .append("text")
+    .attr("x", 0)
+    .attr("data-name", "smokes")
+    .attr("data-axis", "y")
+    .attr("class", "aText inactive y")
+    .text("Percent Smokes");
+yText
+    .append("text")
+    .attr("y", 26)
+    .attr("data-name", "healthcare")
+    .attr("data-axis", "y")
+    .attr("class", "aText inactive y")
+    .text("Percentage Without Healthcare");
+
