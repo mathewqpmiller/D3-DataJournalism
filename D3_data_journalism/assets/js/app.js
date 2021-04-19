@@ -8,3 +8,8 @@ let labelArea = 110;
 let tPadBot = 40;
 let tPadLeft = 40;
 
+// Scatter Plot SVG Setup
+var svg = d3
+    .select("#scatter")
+    .append("svg")
+    .attr()
