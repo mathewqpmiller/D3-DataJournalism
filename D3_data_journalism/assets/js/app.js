@@ -166,7 +166,9 @@ function visualize(theData) {
     // Call tooltip function
     svg.call(toolTip);
 
-    // Create remove repetative code x function
+    // REMOVE REPETATIVE CODE
+
+    // Change the min and max for x 
     function xMinMax() {
         // Select smallest data from column
         xMin = d3.min(theData, function(d) {
@@ -177,7 +179,7 @@ function visualize(theData) {
             return parseFloat(d[curx]) * 1.10;
         });
     }
-    // Create remove repetative code y function
+    // Change the min and max for y
     function yMinMax() {
         // Select smallest data from the column
         yMin = d3.min(theData, function(d) {
@@ -188,5 +190,22 @@ function visualize(theData) {
             return parseFloat(d[curY]) * 1.10;
         });
     }
+
+    // CHANGE LABEL APPEARANCE
+
+    // Create label select change function
+    function labelChange(axis, clickedText) {
+        // Change from active to inactive
+        d3
+            .selectAll(".aText")
+            .filter("." + axis)
+            .filter(".active")
+            .classed("active", false)
+            .classed("inactive", true);
+        // Switch selected label to active
+        clickedText.classed("inactive", false).classed("active", true);
+    }
+
+    
 
 }
