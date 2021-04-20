@@ -205,7 +205,34 @@ function visualize(theData) {
         // Switch selected label to active
         clickedText.classed("inactive", false).classed("active", true);
     }
-
     
+    // CREATE THE SCATTER PLOT
+    // Select min and max values
+    xMinMax();
+    yMinMax();
+    // Assign icon placement on plot
+    var xScale = d3
+        .scaleLinear()
+        .domain([xMin, xMax])
+        .range([margin + labelArea, width - margin]);
+    var yScale = d3
+        .scaleLinear()
+        .domain([yMin, yMax])
+        .range([height - margin - labelArea, margin]);
+    // Create the axis
+    var xAxis = d3.axisBottom(xScale);
+    var yAxis = d3.axisLeft(yScale);
+    // Create x/y tick count function
+    function tickCount() {
+        if(width <= 500) {
+            xAxis.ticks(5);
+            yAxis.ticks(5);
+        }
+        else {
+            xAxis.ticks(10);
+            yAxis.ticks(10);
+        }
+    }
+    tickCount();
 
 }
