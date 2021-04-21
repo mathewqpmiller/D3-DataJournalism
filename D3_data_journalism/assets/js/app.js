@@ -280,6 +280,8 @@ function visualize(theData) {
             d3.select(this).style("stroke", "#e3e3e3");
         });
 
+    // LABEL ICONS
+    
     // Match state abbreviations with labels dataset
     theCircles
         .append("text")
@@ -298,8 +300,18 @@ function visualize(theData) {
         .attr("font-size", circRadius)
         .attr("class", "stateText")
         // Additional hover rules
-        toolTip.show(d);
-        // Highlight the state circle's border
-        d3.select("." + d.abbr).style("stroke", "#323232")
-    });
+        .on("mouseover", function(d) {
+            // Show tooltip
+            toolTip.show(d);
+            // Highlight circle
+            d3.select("." + d.abbr).style("stroke", "#323232");
+        })
+        .on("mouseout", function(d) {
+            // Hide tooltip
+            toolTip.hide(d);
+            // Hide highlight
+            d3.select("." + d.abbr).style("stroke", "#e3e3e3");    
+        });
+    
+    // 
 }
