@@ -234,5 +234,34 @@ function visualize(theData) {
         }
     }
     tickCount();
+    // Append x/y axis plots in groups
+    svg
+        .append("g")
+        .call(xAxis)
+        .attr("class", "xAxis")
+        .attr("transform", "translate(0," + (height - margin - labelArea) + ")");
+    svg
+        .append("g")
+        .call(yAxis)
+        .attr("class", "yAxis")
+        .attr("transform", "translate(" + (margin + labelArea) + ", 0)");
+    // Group the labels to the dots
+    var theCircles = svg.selectAll("g theCircles").data(theData).enter();
+    // Iterate through rows and append data to icons
+    theCircles
+        .append("circle")
+        // Set size, class and location attributes
+        .attr("cx", function(d) {
+            return xScale(d[curX]);
+        })
+        .attr("cy", function(d) {
+            return yScale(d[curY]);
+        })
+        .attr("r", circRadius)
+        .attr("class", function(d) {
+            return "stateCircle " + d.abbr;
+        })
+
+        // CREATE MOUSEOVER HOVER EVENT
 
 }
