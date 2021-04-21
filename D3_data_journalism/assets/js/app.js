@@ -207,7 +207,7 @@ function visualize(theData) {
     }
     
     // CREATE THE SCATTER PLOT
-    
+
     // Select min and max values
     xMinMax();
     yMinMax();
@@ -248,6 +248,7 @@ function visualize(theData) {
         .attr("transform", "translate(" + (margin + labelArea) + ", 0)");
     // Group the labels to the dots
     var theCircles = svg.selectAll("g theCircles").data(theData).enter();
+    
     // Iterate through rows and append data to icons
     theCircles
         .append("circle")
@@ -279,4 +280,26 @@ function visualize(theData) {
             d3.select(this).style("stroke", "#e3e3e3");
         });
 
+    // Match state abbreviations with labels dataset
+    theCircles
+        .append("text")
+        // Abbreviate text
+        .text(function(d) {
+            return d.abbr;
+        })
+        // Place abbreviation to icon
+        .attr("dx", function(d) {
+            return xScale(d[curX]);
+        })
+        // Scale text to fit icon
+        .attr("dy", function(d) {
+            return yScale(d[curY]) + curcRadius / 2.5;
+        })
+        .attr("font-size", circRadius)
+        .attr("class", "stateText")
+        // Additional hover rules
+        toolTip.show(d);
+        // Highlight the state circle's border
+        d3.select("." + d.abbr).style("stroke", "#323232")
+    });
 }
