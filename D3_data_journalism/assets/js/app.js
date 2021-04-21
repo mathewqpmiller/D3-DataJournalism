@@ -207,6 +207,7 @@ function visualize(theData) {
     }
     
     // CREATE THE SCATTER PLOT
+    
     // Select min and max values
     xMinMax();
     yMinMax();
@@ -262,6 +263,20 @@ function visualize(theData) {
             return "stateCircle " + d.abbr;
         })
 
-        // CREATE MOUSEOVER HOVER EVENT
+        // CREATE MOUSEOVER EVENT
+
+        // Create hover function
+        .on("mouseover", function(d) {
+            // Show the tooltip
+            toolTip.show(d, this);
+            // Highlight border
+            d3.select(this).style("stroke", "##323232");
+        })
+        .on("mouseout", function(d) {
+            // Hide the tooltip
+            toolTip.hide(d);
+            // Remove highlighted border
+            d3.select(this).style("stroke", "#e3e3e3");
+        });
 
 }
