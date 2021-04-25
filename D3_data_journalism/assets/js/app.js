@@ -3,12 +3,12 @@
 // SCATTER PLOT PARAMETERS
 
 // Scatter plot container box parameters
-let width = parseInt(d3.select("#scatter").style("width"));
-let height = width - width / 4.0;
-let margin = 20;
-let labelArea = 110;
-let tPadBot = 40;
-let tPadLeft = 40;
+var width = parseInt(d3.select("#scatter").style("width"));
+var height = width - width / 4.0;
+var margin = 20;
+var labelArea = 110;
+var tPadBot = 40;
+var tPadLeft = 40;
 
 // Scatter plot SVG setup
 var svg = d3
@@ -92,7 +92,7 @@ function yTextRefresh() {
 yTextRefresh();
 // Append labels, define axis and set spacing
 // Obesity
-yText 
+yText
     .append("text")
     .attr("y", -26)
     .attr("data-name", "obesity")
@@ -150,7 +150,7 @@ function visualize(theData) {
             // If statement: if x equals poverty then
             if (curX === "poverty") {
                 // grab value formatted to show percentage
-                theX = "<div>" + curX + ": " + d[curX] + "%</div>"; 
+                theX = "<div>" + curX + ": " + d[curX] + "%</div>";
             }
             // Else grab value formatted to show delimiter
             else {
@@ -168,7 +168,7 @@ function visualize(theData) {
 
     // REMOVE REPETATIVE CODE
 
-    // Change the min and max for x 
+    // Change the min and max for x
     function xMinMax() {
         // Select smallest data from column
         xMin = d3.min(theData, function(d) {
@@ -205,7 +205,7 @@ function visualize(theData) {
         // Switch selected label to active
         clickedText.classed("inactive", false).classed("active", true);
     }
-    
+
     // CREATE THE SCATTER PLOT
 
     // Select min and max values
@@ -248,7 +248,7 @@ function visualize(theData) {
         .attr("transform", "translate(" + (margin + labelArea) + ", 0)");
     // Group the labels to the dots
     var theCircles = svg.selectAll("g theCircles").data(theData).enter();
-    
+
     // Iterate through rows and append data to icons
     theCircles
         .append("circle")
@@ -281,7 +281,7 @@ function visualize(theData) {
         });
 
     // LABEL ICONS
-    
+
     // Match state abbreviations with labels dataset
     theCircles
         .append("text")
@@ -310,8 +310,140 @@ function visualize(theData) {
             // Hide tooltip
             toolTip.hide(d);
             // Hide highlight
-            d3.select("." + d.abbr).style("stroke", "#e3e3e3");    
+            d3.select("." + d.abbr).style("stroke", "#e3e3e3");
         });
-    
-    // 
+
+    // INITIATE GRAPH DYNAMICS
+
+    // Create label select event
+    d3.selectAll(".aText").on("click", function() {
+        var self = d3.select(this);
+        // If selected statement
+        if (self.classed("inactive")) {
+          // Grab label axis and name
+          var axis = self.attr("data-axis");
+          var name = self.attr("data-name");
+          // When x
+          if (axis === "x") {
+            // Parse info into name
+            curX = name;
+            // Adjust min and max values
+            xMinMax();
+            // Update x
+            xScale.domain([xMin, xMax]);
+            // Use transition
+            svg.select(".xAxis").transition().duration(300).call(xAxis);
+            // Update state circle location
+            d3.selectAll("circle").each(function() {
+              // Motion tween from original location to new
+              d3
+                .selcet(this)
+                .transition()
+                .attr("cx", function(d) {
+                  return xScale(d[curX]);
+                })
+                .duration(300);
+            });
+            // Change state texts locations
+            d3.selectAll(".stateText").each(function() {
+              // Duplicate motion tween for state text
+              d3
+                .select(this)
+                .transition()
+                .attr("dx", function(d) {
+                  return xScale(d[curX]);
+                })
+                .duration(300);
+            });
+            // Change active label class
+            labelChange(axis, self);
+          }
+          else {
+            // When y parse info
+            curY = name;
+            // Adjust min and max values
+            yMinMax();
+            // Update y
+            yScale.domain([yMin, yMax]);
+            // Use transition
+            svg.select(".yAxis").transition().duration(300).call(yAxis);
+            // Update location
+            d3.selectAll("circle").each(function() {
+              // Apply another motion tween
+              d3
+                .select(this)
+                .transition()
+                .attr("cy", function(d) {
+                  return yScale(d[curY]);
+                })
+                .duration(300);
+            });
+            // Again, change state texts locations
+            d3.selectAll(".stateText").each(function() {
+              // Apply motion tween
+              d3
+                .select(this)
+                .transition()
+                .attr("dy", function(d) {
+                  return yScale(d[curY]) + circRadius / 3;
+                })
+                .duration(300);
+            });
+            // Change last active label class
+            labelChange(axis, self);
+          }
+        }
+    });
+
+    //  CREATE WINDOW RESIZE CAPABILITIES
+
+    // d3 window resize event
+    d3.select(window).on("resize", resize);
+    // Specify which parts to resize
+    function resize() {
+      // Redifine window dependent variables
+      width = parseInt(d3.select("#scatter").style("width"));
+      height = width - width / 3.9;
+      leftTextY = (height + labelArea) / 2 - labelArea;
+      // Apply width and height
+      svg.attr("width", width).attr("height", height);
+      // Adjust x and y scale range
+      xScale.range([margin + labelArea, width - margin]);
+      yScale.range([height - margin - labelArea, margin]);
+      // Update the axes
+      svg
+        .select(".xAxis")
+        .call(xAxis)
+        .attr("transform", "translate(0," + (height - margin - labelArea) + ")");
+      svg.select(".yAxis").call(yAxis);
+      //  Udate ticks
+      tickCount();
+      // Update labels
+      xTextRefresh();
+      yTextRefresh();
+      // Update icon radius
+      crGet();
+      // Update location / radius of icons
+      d3
+        .selectAll("circle")
+        .attr("cy", function(d) {
+          return yScale(d[curY]);
+        })
+        .attr("cx", function(d) {
+          return xScale(d[curX]);
+        })
+        .attr("r", function() {
+          return circRadius;
+        });
+      // Change size / location of state texts
+      d3
+        .selectAll(".stateText")
+        .attr("dy", function(d) {
+          return yScale(d[curY]) + circRadius / 3;
+        })
+        .attr("dx", function(d) {
+          return xScale(d[curX]);
+        })
+        .attr("r", circRadius / 3);
+    }
 }
