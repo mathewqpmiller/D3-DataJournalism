@@ -74,8 +74,8 @@ xText
   .text("Median Household Income");
 // Y axis: Obesity, Smoker and Has Healthcare
 // Additional X/Y axis spacing
-var leftTextX = margin + tPadLeft;
-var leftTextY = (height + labelArea) / 2 - labelArea;
+var XTextLeft = margin + tPadLeft;
+var YTextLeft = (height + labelArea) / 2 - labelArea;
 // Group Y axis labels
 svg.append("g").attr("class", "yText");
 // D3.select y axis group
@@ -84,7 +84,7 @@ var yText = d3.select(".yText");
 function yTextRefresh() {
   yText.attr(
     "transform",
-    "translate(" + leftTextX + ", " + leftTextY + ")rotate(-90)"
+    "translate(" + XTextLeft + ", " + YTextLeft + ")rotate(-90)"
   );
 }
 yTextRefresh();
