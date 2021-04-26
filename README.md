@@ -14,7 +14,7 @@ I need to create a scatterplot between the two data variables of People Without 
 I will use D3 techniques taught in class and create a scatterplot representing all states with icons. Further, I will code this graphic in the app.js file of my homework directory.  It is curcial that I pull in the data from data.csv by using the d3.csv function. My scatterplot appears in the image at the bottom of this section.
 
 <p align="center">
-    <img src="https://github.com/mathewqpmiller/Plotly-Biodiversity_Analysis/blob/main/Images/my_bar_chart.JPG?raw=true" height ="350">
+    <img src="https://github.com/mathewqpmiller/D3-Data_Journalism_Visualization/blob/main/D3_data_journalism/assets/D3Scatterplot.JPG?raw=true" height ="350">
 </p>
 
 ### D3 Dynamic Scatterplot
@@ -22,7 +22,7 @@ I will use D3 techniques taught in class and create a scatterplot representing a
 For the dynamic and interactive scatterplot, I am going to include more demographics and more risk factors. I'll need to place additional labels in this scatter plot and give them click-events so that users can decide which data to display. Additionally, I will need to animate the transitions of the icons' locations as well as the range of your axes. For this activity I have chosen to create three for each axis.
 
 <p align="center">
-    <img src="https://github.com/mathewqpmiller/Plotly-Biodiversity_Analysis/blob/main/Images/my_bar_chart.JPG?raw=true" height ="350">
+    <img src="https://github.com/mathewqpmiller/D3-Data_Journalism_Visualization/blob/main/D3_data_journalism/assets/D3DynamicScatterplot.JPG?raw=true" height ="350">
 </p>
 
 ### Deploy HTML to GitHub Pages
