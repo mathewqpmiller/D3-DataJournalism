@@ -27,5 +27,5 @@ For the dynamic and interactive scatterplot, I am going to include more demograp
 
 ### Deploy HTML to GitHub Pages
 * Deploy your app to a free static page hosting service, such as GitHub Pages. Submit the links to your deployment and your GitHub repo.
-* https://mathewqpmiller.github.io/D3-Data_Journalism_Visualization/
+* https://mathewqpmiller.github.io/D3-DataJournalism/
 * Ensure your repository has regular commits (i.e. 20+ commits) and a thorough README.md file
