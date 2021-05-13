@@ -1,4 +1,4 @@
-# D3-Data_Journalism_Visualization
+# D3: Data Journalism Visualization
 
 University of Oregon: Data Analytics Boot Camp repository for homework assignment number 13.
 
