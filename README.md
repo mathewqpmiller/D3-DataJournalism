@@ -1,6 +1,6 @@
 # D3: Data Journalism Visualization
 
-University of Oregon: Data Analytics Boot Camp repository for homework assignment number 13.
+
 
 ## D3 Scatterplot and Interactive Scatterplot
 
@@ -29,3 +29,6 @@ For the dynamic and interactive scatterplot, I am going to include more demograp
 * Deploy your app to a free static page hosting service, such as GitHub Pages. Submit the links to your deployment and your GitHub repo.
 * https://mathewqpmiller.github.io/D3-DataJournalism/
 * Ensure your repository has regular commits (i.e. 20+ commits) and a thorough README.md file
+
+
+UNIVERSITY OF OREGON: Data Analytics Boot Camp - Repository for project 13(D3 Challenge)
