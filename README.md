@@ -4,9 +4,7 @@
 
 ## D3 Scatterplot and Interactive Scatterplot
 
-For this activity I have been tasked with analyzing the current trends in various health related and income data. As well, I will need to create charts, graphs and interactive elements to help readers understand the analysis and recommendations.
-
-The premise of the exercise is to provide results to a newspaper editor about some health risks facing particular demographics. The editor is relying on me to sift through the information from a U.S. Census Bureau and the Behavioral Risk Factor Surveillance System. The dataset is based on 2014 ACS 1-year estimates from the US Census Bureau and the data set includes rates of income, obesity, poverty, etc. by state.
+The premise of the project was to provide results to a newspaper editor about some health risks facing particular demographics. The editor is relying on me to sift through the information from a U.S. Census Bureau and the Behavioral Risk Factor Surveillance System. The dataset is based on 2014 ACS 1-year estimates from the US Census Bureau and the data set includes rates of income, obesity, poverty, etc. by state.
 
 ### D3 Scatterplot
 
