@@ -31,4 +31,9 @@ For the dynamic and interactive scatterplot, I am going to include more demograp
 * Ensure your repository has regular commits (i.e. 20+ commits) and a thorough README.md file
 
 
+<p align="center">
 UNIVERSITY OF OREGON: Data Analytics Boot Camp - Repository for project 13(D3 Challenge)
+</p>
+<p align="center">
+Mathew Miller © 2021. All Rights Reserved.
+</p>
